@@ -1,0 +1,14 @@
+--- /usr/lib/perl5/site_perl/5.10.1/HTML/Selector/XPath.pm	2011-11-24 22:14:11.000000000 +0000
++++ lib/XML/LibXML/QuerySelector/ToXPath.pm	2012-01-03 22:39:44.410280697 +0000
+@@ -139,6 +139,11 @@
+             } else {
+                 $tag = '*';
+             }
++
++            if (defined $parms{prefix} and not $tag =~ /[*:|]/) {
++                $tag = join ':', $parms{prefix}, $tag;
++            }
++
+             if (! $wrote_tag++) {
+                 push @parts, $tag;
+                 $tag_index = $#parts;
