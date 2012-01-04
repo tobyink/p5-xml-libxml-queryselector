@@ -22,11 +22,11 @@ sub querySelectorAll
 {
 	my ($self, $selector_string) = @_;
 	my $selector = XML::LibXML::QuerySelector::ToXPath->new($selector_string);
-	my $xpath = $selector->to_xpath(prefix => 'xhtml');
+	my $xpath = $selector->to_xpath(prefix => 'defaultns');
 	
 	my $document = $self->nodeName =~ /^#/ ? $self : $self->ownerDocument;
 	my $xc = XML::LibXML::XPathContext->new($document);
-	$xc->registerNs(xhtml => 'http://www.w3.org/1999/xhtml');
+	$xc->registerNs(defaultns => $document->documentElement->namespaceURI);
 	
 	if ($document == $self)
 	{
