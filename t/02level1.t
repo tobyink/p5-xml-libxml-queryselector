@@ -1,5 +1,4 @@
 use Test::More tests => 7;
-use Data::Printer;
 use XML::LibXML::QuerySelector;
 
 my $document = XML::LibXML->new->parse_string(<<'XHTML');
