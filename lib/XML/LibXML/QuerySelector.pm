@@ -1,28 +1,26 @@
-package XML::LibXML::QuerySelector;
-
-use 5.010;
-use common::sense;
+use 5.008;
+use strict;
 use utf8;
+
+package XML::LibXML::QuerySelector;
 
 use HTML::Selector::XPath 0.13 qw//;
 use XML::LibXML 1.70 qw//;
 
 BEGIN
 {
-	$XML::LibXML::QuerySelector::AUTHORITY = 'cpan:TOBYINK';
-	$XML::LibXML::QuerySelector::VERSION   = '0.003';
+	our $AUTHORITY = 'cpan:TOBYINK';
+	our $VERSION   = '0.004';
 	
 	push @XML::LibXML::Document::ISA, __PACKAGE__;
 	push @XML::LibXML::DocumentFragment::ISA, __PACKAGE__;
 	push @XML::LibXML::Element::ISA, __PACKAGE__;
-	
-	eval { require Object::AUTHORITY; Object::AUTHORITY->import };
-	eval { require Object::DOES;      Object::DOES->import };
 }
 
 my $contains = sub 
 {
-	my ($self, $node) = @_;
+	my $self = shift;
+	my ($node) = @_;
 	my $self_path = $self->nodePath;
 	my $node_path = $node->nodePath;
 	my $sub_node_path = substr $node_path, 0, length $self_path;
@@ -31,13 +29,14 @@ my $contains = sub
 
 sub querySelectorAll
 {
-	my ($self, $selector_string) = @_;
-	my $selector = HTML::Selector::XPath->new($selector_string);
+	my $self = shift;
+	my ($selector_string) = @_;
+	my $selector = "HTML::Selector::XPath"->new($selector_string);
 	
 	my $document = $self->nodeName =~ /^#/ ? $self : $self->ownerDocument;
 	my $nsuri    = $document->documentElement->lookupNamespaceURI('');
 	
-	my $xc = XML::LibXML::XPathContext->new($document);
+	my $xc = "XML::LibXML::XPathContext"->new($document);
 	$xc->registerNs(defaultns => $nsuri) if $nsuri;
 
 	my $xpath = defined $nsuri
@@ -53,12 +52,13 @@ sub querySelectorAll
 		{ $self->$contains($_) ? ($_) : () }
 		@{[ $xc->findnodes($xpath) ]};
 	
-	wantarray ? @results : XML::LibXML::NodeList->new(@results);
+	wantarray ? @results : "XML::LibXML::NodeList"->new(@results);
 }
 
 sub querySelector
 {
-	my ($self, $selector_string) = @_;
+	my $self = shift;
+	my ($selector_string) = @_;
 	my $results = $self->querySelectorAll($selector_string);
 	return unless $results->size;
 	$results->shift;
@@ -73,14 +73,16 @@ XML::LibXML::QuerySelector - add querySelector and querySelectorAll methods to X
 
 =head1 SYNOPSIS
 
-  my $document = XML::LibXML->new->parse_file('my.xhtml');
+  use XML::LibXML::QuerySelector;
+  
+  my $document = XML::LibXML->load_xml(location => 'my.xhtml');
   my $warning  = $document->querySelector('p.warning strong');
   print $warning->toString if defined $warning;
 
 =head1 DESCRIPTION
 
 This module defines a class (it has no constructor so perhaps closer to an
-abstract class or a role)XML::LibXML::QuerySelector, and sets itself up as
+abstract class or a role) XML::LibXML::QuerySelector, and sets itself up as
 a superclass (not a subclass) of L<XML::LibXML::Document>,
 L<XML::LibXML::DocumentFragment> and L<XML::LibXML::Element>, thus making
 its methods available to objects of those classes.
@@ -90,8 +92,8 @@ I<relatively> safe manner.
 
 =head2 Methods
 
-The methods provided by this module are defined in the W3C Candidate
-Recomendation "Selectors API Level 1" L<http://www.w3.org/TR/selectors-api/>.
+The methods provided by this module are defined in the W3C Recomendation
+"Selectors API Level 1" L<http://www.w3.org/TR/selectors-api/>.
 
 =over
 
@@ -114,7 +116,7 @@ context, as an L<XML::LibXML::NodeList>.
 =item * When called on an element, C<querySelectorAll> returns a static
 node list; not a live node list. (Called on a document or document
 fragment, it will return a live node list as specified in the W3C
-Candidate Recommendation.)
+Recommendation.)
 
 =item * Use on mixed-namespace documents is largely untested. The module
 is mostly intended for use with XHTML and HTML documents.
@@ -140,18 +142,20 @@ C<getElementsByClassName>.
 L<HTML::Selector::XPath>,
 L<XML::LibXML>.
 
+L<http://www.w3.org/TR/selectors-api/>.
+
 =head1 AUTHOR
 
 Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
 
 =head1 THANKS
 
-Tatsuhiko Miyagawa and Max Maischein, for HTML::Selector::XPath, and for
+Tatsuhiko Miyagawa and Max Maischein, for L<HTML::Selector::XPath>, and for
 resolving L<https://rt.cpan.org/Ticket/Display.html?id=73719> quickly.
 
 =head1 COPYRIGHT AND LICENCE
 
-This software is copyright (c) 2012 by Toby Inkster.
+This software is copyright (c) 2012-2013 by Toby Inkster.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

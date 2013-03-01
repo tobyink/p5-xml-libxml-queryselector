@@ -6,8 +6,7 @@
 	:perl_version_from _:main ;
 	:version_from _:main ;
 	:readme_from _:main ;
-	:test_requires "Test::More 0.61" ;
-	:requires "Carp", "HTML::Selector::XPath 0.13", "XML::LibXML 1.70" , "common::sense" , "utf8" .
+	:requires "HTML::Selector::XPath 0.13", "XML::LibXML 1.70".
 
 _:main <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/XML/LibXML/QuerySelector.pm" .
 

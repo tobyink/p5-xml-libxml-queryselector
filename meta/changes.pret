@@ -1,0 +1,25 @@
+
+`XML-LibXML-QuerySelector 0.001 cpan:TOBYINK`
+	issued     2012-01-05;
+	label      "Initial release".
+
+`XML-LibXML-QuerySelector 0.002 cpan:TOBYINK`
+	issued     2012-01-07;
+	changeset [
+		item "Remove spurious 'use Data::Printer' from t/02level1.t"^^Packaging;
+	].
+
+`XML-LibXML-QuerySelector 0.003 cpan:TOBYINK`
+	issued     2012-01-17;
+	changeset [
+		item "Dropped XML::LibXML::QuerySelector::ToXPath, which was a bundled and modified version of HTML::Selector::XPath."^^Removal;
+		item "use HTML::Selector::XPath 0.13"^^Update;
+	] .
+
+`XML-LibXML-QuerySelector 0.004 cpan:TOBYINK`
+	issued     2013-03-01;
+	changeset [
+		item "General cleanup."^^Update;
+		item "Drop common::sense dependency."^^Packaging;
+		item "No longer refer the the spec as a 'Candidate Recommendation'; it's a 'Recommendation' now."^^Update;
+	] .
