@@ -14,7 +14,7 @@
 	:homepage       <https://metacpan.org/release/XML-LibXML-QuerySelector> ;
 	:download-page  <https://metacpan.org/release/XML-LibXML-QuerySelector> ;
 	:bug-database   <http://rt.cpan.org/Dist/Display.html?Queue=XML-LibXML-QuerySelector> ;
-	:repository     [ a :HgRepository ; :browse <https://bitbucket.org/tobyink/p5-xml-libxml-queryselector> ] ;
+	:repository     [ a :GitRepository ; :browse <https://github.com/tobyink/p5-xml-libxml-queryselector> ] ;
 	:created        "2012-01-03"^^xsd:date ;
 	:license        <http://dev.perl.org/licenses/> ;
 	:developer      [ a foaf:Person ; foaf:name "Toby Inkster" ; foaf:mbox <mailto:tobyink@cpan.org> ] .
