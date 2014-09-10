@@ -10,7 +10,7 @@ use XML::LibXML 1.70 qw//;
 BEGIN
 {
 	our $AUTHORITY = 'cpan:TOBYINK';
-	our $VERSION   = '0.004';
+	our $VERSION   = '0.005';
 	
 	push @XML::LibXML::Document::ISA, __PACKAGE__;
 	push @XML::LibXML::DocumentFragment::ISA, __PACKAGE__;

@@ -23,3 +23,10 @@
 		item "Drop common::sense dependency."^^Packaging;
 		item "No longer refer the the spec as a 'Candidate Recommendation'; it's a 'Recommendation' now."^^Update;
 	] .
+
+`XML-LibXML-QuerySelector 0.005 cpan:TOBYINK`
+	issued    2014-09-10;
+	changeset [
+		item "Switch to Dist::Inkt."^^Packaging;
+	].
+
