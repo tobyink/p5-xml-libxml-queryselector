@@ -1,0 +1,8 @@
+@prefix deps:  <http://ontologi.es/doap-deps#> .
+
+<http://purl.org/NET/cpan-uri/dist/XML-LibXML-QuerySelector/project>
+	deps:runtime-requirement         [
+		deps:on "HTML::Selector::XPath 0.13"^^deps:CpanId;
+	];
+	deps:runtime-requirement         [ deps:on "XML::LibXML 1.70"^^deps:CpanId ].
+
